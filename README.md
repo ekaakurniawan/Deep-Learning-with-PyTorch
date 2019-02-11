@@ -48,7 +48,7 @@
 4. [VGG16, Adam, wNorm](https://github.com/ekaakurniawan/Deep-Learning-with-PyTorch/blob/master/project-0/4_vgg16_adam_wNorm/Image%20Classifier%20Project.ipynb)
 5. [InceptionV3, SGD, wNorm](https://github.com/ekaakurniawan/Deep-Learning-with-PyTorch/blob/master/project-0/5_inceptionV3_sgd_wNorm/Image%20Classifier%20Project.ipynb)
 6. [ResNet152, SGD, wNorm](https://github.com/ekaakurniawan/Deep-Learning-with-PyTorch/blob/master/project-0/6_resnet152_sgd_wNorm/Image%20Classifier%20Project.ipynb)
-7. [DenseNet121, SGD, wNorm, Momentum, MultiHyperParam](https://github.com/ekaakurniawan/Deep-Learning-with-PyTorch/blob/master/project-0/7_train_densenet121_sgd_wNorm_momentum_contGrad_predNoRand/Image%20Classifier%20Project.ipynb)
+7. [DenseNet121, SGD, wNorm, Momentum, wFineTuning](https://github.com/ekaakurniawan/Deep-Learning-with-PyTorch/blob/master/project-0/7_train_densenet121_sgd_wNorm_momentum_contGrad_predNoRand/Image%20Classifier%20Project.ipynb)
 
 
 ## Benchmark Result
