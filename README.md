@@ -31,6 +31,7 @@
 
 ### Style Transfer
 - [Style Transfer with Deep Neural Networks](https://github.com/ekaakurniawan/Deep-Learning-with-PyTorch/blob/master/style-transfer/Style_Transfer_Exercise.ipynb)
+- [Style Transfer Slides, AI Guild, Bukalapak, 29 March 2019](./slides/DL-Style-Transfer-Slides.pdf)
 
 ### Recurrent Neural Networks
 1. Recurrent Neural Networks Applications
