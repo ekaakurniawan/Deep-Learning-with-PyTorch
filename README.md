@@ -23,7 +23,7 @@
    - [Image Classification using Multi-Layer Perceptron and MNIST Images](https://github.com/ekaakurniawan/Deep-Learning-with-PyTorch/blob/master/convolutional-neural-networks/mnist-mlp/mnist_mlp_exercise.ipynb)
 2. Image Classification using Convolutional Neural Networks
    - [Load and Augment CIFAR-10 Images](https://github.com/ekaakurniawan/Deep-Learning-with-PyTorch/blob/master/convolutional-neural-networks/cifar-cnn/cifar10_cnn_augmentation.ipynb)
-   - [Image Classification using Convolutional Neural Networks and CIFAR-10 Images](https://github.com/ekaakurniawan/Deep-Learning-with-PyTorch/blob/master/convolutional-neural-networks/cifar-cnn/model_augmented.pt)
+   - [Image Classification using Convolutional Neural Networks and CIFAR-10 Images](https://github.com/ekaakurniawan/Deep-Learning-with-PyTorch/blob/master/convolutional-neural-networks/cifar-cnn/cifar10_cnn_exercise.ipynb)
 3. Convolutional Visualization
    - [Convolutional Layer](https://github.com/ekaakurniawan/Deep-Learning-with-PyTorch/blob/master/convolutional-neural-networks/conv-visualization/conv_visualization.ipynb)
    - [Creating a Filter, Edge Detection](https://github.com/ekaakurniawan/Deep-Learning-with-PyTorch/blob/master/convolutional-neural-networks/conv-visualization/custom_filters.ipynb)
