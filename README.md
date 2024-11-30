@@ -51,6 +51,85 @@
 6. [ResNet152, SGD, wNorm](https://github.com/ekaakurniawan/Deep-Learning-with-PyTorch/blob/master/project-0/6_resnet152_sgd_wNorm/Image%20Classifier%20Project.ipynb)
 7. [DenseNet121, SGD, wNorm, Momentum, wFineTuning](https://github.com/ekaakurniawan/Deep-Learning-with-PyTorch/blob/master/project-0/7_train_densenet121_sgd_wNorm_momentum_contGrad_predNoRand/Image%20Classifier%20Project.ipynb)
 
+## Setup
+
+### Intel GPU
+
+Please follow 
+[Getting Started on Intel GPU](https://pytorch.org/docs/stable/notes/get_start_xpu.html)
+article from PyTorch.
+
+__Note__: If your system has an NPU, please disable it. One method is by 
+revoking the access from the current user group. Change NPU group access from 
+render to root.
+
+To revoke NPU access from the current user group.
+```
+$ sudo chgrp root /dev/accel/accel0 
+```
+
+To grant NPU access back to the current user group.
+```
+$ sudo chgrp render /dev/accel/accel0 
+```
+
+Tested on the following hardware specification and software version.
+
+__Hardware Specification__
+ - CPU: Intel® Core™ Ultra 9 Processor 285K
+ - CPU Cores: 24
+ - CPU Threads: 24
+ - Memory: 32 GiB
+ - GPU: Intel® Arc™ A770 Graphics 
+ - GPU Memory: 16 GiB
+ 
+__Software Version__
+ - Ubuntu 24.04.1 LTS
+ - Python 3.12.2
+ - PyTorch 2.5.1+xpu
+ - TorchVision 0.20.1+xpu
+ - NumPy 1.26.3
+ - Matplotlib 0.1.7
+ - Pandas 2.2.3
+ - intel-for-pytorch-gpu-dev-0.5
+ - intel-pti-dev-0.9
+
+### Install Requirements
+
+Create virtual environment.
+```
+$ python3 -m venv pytorch_arc_env
+$ source pytorch_arc_env/bin/activate
+$ python -m pip install --upgrade pip
+```
+
+Install PyTorch and other required packages.
+```
+$ pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/test/xpu
+$ pip install --upgrade -r requirements.txt
+```
+
+### Test Run
+
+Activate virtual environment and setup variables.
+```
+$ source pytorch_arc_env/bin/activate
+$ source /opt/intel/oneapi/pytorch-gpu-dev-0.5/oneapi-vars.sh
+$ source /opt/intel/oneapi/pti/0.9/env/vars.sh
+```
+
+Detect GPU.
+```
+$ python -c "import torch; print(torch.xpu.is_available())"
+```
+```
+True
+```
+
+Run notebooks.
+```
+$ jupyter lab
+```
 
 ## Benchmark Result
 
