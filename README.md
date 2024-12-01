@@ -77,10 +77,10 @@ Tested on the following hardware specification and software version.
 
 __Hardware Specification__
  - CPU: Intel® Core™ Ultra 9 Processor 285K
- - CPU Cores: 24
+ - CPU Cores: 24 (8 Performance-cores and 16 Efficient-cores)
  - CPU Threads: 24
  - Memory: 32 GiB
- - GPU: Intel® Arc™ A770 Graphics 
+ - GPU: Intel® Arc™ A770 Graphics
  - GPU Memory: 16 GiB
  
 __Software Version__
@@ -128,6 +128,7 @@ True
 
 Run notebooks.
 ```
+$ cd Deep-Learning-with-PyTorch
 $ jupyter lab
 ```
 
@@ -147,19 +148,19 @@ __Hyperparameters__
  - Learning Rate: 0.001
  
 __Hardware Specification__
- - CPU Type: Intel(R) Core(TM) i7-8750H CPU @ 2.20GHz
+ - CPU Type: Intel® Core™ i7-8750H Processor 
  - CPU Cores: 6
  - CPU Threads: 12
  - Memory: 16 GiB
- - GPU Type: Nvidia GeForce GTX 1060
+ - GPU Type: NVIDIA GeForce® GTX 1060
  - GPU Memory: 6 GiB
  
 __Software Version__
- - Python: 3.6.7
- - PyTorch: 0.4.1.post2
- - TorchVision: 0.2.1
- - NumPy: 1.15.4
- - CUDA: 9.0
+ - Python 3.6.7
+ - PyTorch 0.4.1.post2
+ - TorchVision 0.2.1
+ - NumPy 1.15.4
+ - CUDA 9.0
 
 __Column Info__
   - Training Time is for the total of training images
