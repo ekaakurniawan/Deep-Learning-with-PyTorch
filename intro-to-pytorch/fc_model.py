@@ -37,12 +37,15 @@ class Network(nn.Module):
         return F.log_softmax(x, dim=1)
 
 
-def validation(model, testloader, criterion):
+def validation(model, testloader, criterion, device="cpu"):
     accuracy = 0
     test_loss = 0
     for images, labels in testloader:
 
         images = images.resize_(images.size()[0], 784)
+        # Send dataset to device
+        images = images.to(device)
+        labels = labels.to(device)
 
         output = model.forward(images)
         test_loss += criterion(output, labels).item()
@@ -58,7 +61,7 @@ def validation(model, testloader, criterion):
     return test_loss, accuracy
 
 
-def train(model, trainloader, testloader, criterion, optimizer, epochs=5, print_every=40):
+def train(model, trainloader, testloader, criterion, optimizer, epochs=5, print_every=40, device="cpu"):
     
     steps = 0
     running_loss = 0
@@ -70,6 +73,9 @@ def train(model, trainloader, testloader, criterion, optimizer, epochs=5, print_
             
             # Flatten images into a 784 long vector
             images.resize_(images.size()[0], 784)
+            # Send dataset to device
+            images = images.to(device)
+            labels = labels.to(device)
             
             optimizer.zero_grad()
             
@@ -86,7 +92,7 @@ def train(model, trainloader, testloader, criterion, optimizer, epochs=5, print_
                 
                 # Turn off gradients for validation, will speed up inference
                 with torch.no_grad():
-                    test_loss, accuracy = validation(model, testloader, criterion)
+                    test_loss, accuracy = validation(model, testloader, criterion, device=device)
                 
                 print("Epoch: {}/{}.. ".format(e+1, epochs),
                       "Training Loss: {:.3f}.. ".format(running_loss/print_every),
