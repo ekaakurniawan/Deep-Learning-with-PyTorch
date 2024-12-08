@@ -2,3 +2,6 @@ __pycache__
 .ipynb_checkpoints
 F_MNIST_data
 Cat_Dog_data
+MNIST
+cifar-10-batches-py
+cifar-10-python.tar.gz

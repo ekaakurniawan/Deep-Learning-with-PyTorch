@@ -88,6 +88,7 @@ __Software Version__
  - Python 3.12.2
  - PyTorch 2.5.1+xpu
  - TorchVision 0.20.1+xpu
+ - opencv-python 4.10.0.84
  - NumPy 1.26.3
  - Matplotlib 0.1.7
  - Pandas 2.2.3
