@@ -136,10 +136,10 @@ $ jupyter lab
 ## Monitoring Tools
 
 ### Ubuntu
- - [top](https://man7.org/linux/man-pages/man1/top.1.html): CPU utilization.
+ - [top](https://man7.org/linux/man-pages/man1/top.1.html): CPU utilization and memory utilization for CPU and iGPU.
  - [Intel GPU top](https://manpages.ubuntu.com/manpages/noble/man1/intel_gpu_top.1.html): Intel iGPU and dGPU utilization.
  - [Intel PCM](https://github.com/intel/pcm): Intel CPU and iGPU power consumption.
- - [Intel XPU-SMI](https://intel.github.io/xpumanager/smi_install_guide.html): Intel dGPU power consumption.
+ - [Intel XPU-SMI](https://intel.github.io/xpumanager/smi_install_guide.html): Intel dGPU power consumption and memory utilization.
  - [NVIDIA SMI](https://docs.nvidia.com/deploy/nvidia-smi/index.html): NVIDIA dGPU utilization and power consumption.
 
 ### Windows
@@ -149,49 +149,82 @@ $ jupyter lab
 ## Benchmark Result
 
 ### Project-0: Image Classification to Recognize Different Species of Flowers
-__Terms__
- - NB: Notebook
- - Norm: Input Image Normalization
 
-__Data__
+__Dataset__
  - Total Training Images: 6552
  - Total Testing Images: 818
 
 __Hyperparameters__
- - Mntm (Momentum): 0.9
  - Learning Rate: 0.001
- 
-__Hardware Specification__
- - CPU Type: Intel® Core™ i7-8750H Processor 
- - CPU Cores: 6
- - CPU Threads: 12
- - Memory: 16 GiB
- - GPU Type: NVIDIA GeForce® GTX 1060
- - GPU Memory: 6 GiB
- 
-__Software Version__
- - Python 3.6.7
- - PyTorch 0.4.1.post2
- - TorchVision 0.2.1
- - NumPy 1.15.4
- - CUDA 9.0
+ - Mntm (Momentum): 0.9
 
-__Column Info__
-  - Training Time is for the total of training images
-  - Testing Time is for the total of testing images
+__Hardware and Software Specification__
+ - **i7-8750H+GTX1060**
+    - CPU: Intel® Core™ i7-8750H Processor 
+    - CPU Cores: 6
+    - CPU Threads: 12
+    - Memory: 16 GiB
+    - GPU: NVIDIA GeForce® GTX 1060
+    - GPU Memory: 6 GiB
+    - Python 3.6.7
+    - PyTorch 0.4.1.post2
+    - TorchVision 0.2.1
+    - NumPy 1.15.4
+    - CUDA 9.0
+ - **9-285K+A770**
+    - CPU: Intel® Core™ Ultra 9 Processor 285K
+    - CPU Cores: 24 (8 Performance-cores and 16 Efficient-cores)
+    - CPU Threads: 24
+    - Memory: 32 GiB
+    - GPU: Intel® Arc™ A770 Graphics
+    - GPU Memory: 16 GiB
+    - Ubuntu 24.04.1 LTS
+    - Python 3.12.2
+    - PyTorch 2.5.1+xpu
+    - TorchVision 0.20.1+xpu
+    - opencv-python 4.10.0.84
+    - NumPy 1.26.3
+    - Matplotlib 0.1.7
+    - Pandas 2.2.3
+    - intel-for-pytorch-gpu-dev-0.5
+    - intel-pti-dev-0.9
+
+__Terms__
+ - NB: Notebook
+ - Norm: Image normalization
+ - HW/SW: Hardware and software specification
+ - Acc: Accuracy at 30 epoch
+ - Util: Utilization
+ - Pow: Power consumption
+ - Mem: Memory utilization
+ - SGD: Stochastic Gradient Descent
+ - Mntm: Momentum
 
 ```
-------------------------------------------------------------------------------------------------------------
-NB   Model          Optimizer   Norm   GPU Utilization (%)   GPU Memory    Training   Testing   Best Testing
-                                       Training   Testing    Consumption   Time       Time      Accuracy
-                                                             (MiB)         (s)        (s)       (%)
-------------------------------------------------------------------------------------------------------------
-1    VGG16          SGD         No       -          -           -           -          -        78
-2    VGG16          SGD         Yes    100          -           -          69          8        88
-3    VGG16          SGD+Mntm    Yes    100         98        1945          71          7        92
-4    VGG16          Adam        Yes    100          -        4096           -          -        65
-5    Inception V3   SGD         Yes     97         97        1228          47          6        82
-6    ResNet152      SGD         Yes    100        100        1024          73         10        86
-7    DenseNet121    SGD+Mntm    Yes     98         98         999          35          4        95
-------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+|    |               |           |      |                  | Acc (%) | Time/Epoch (s) | CPU Util (%) | CPU Pow (W)  | CPU Mem (GB) | GPU Util (%) | GPU Pow (W)  | GPU Mem (GiB) |
+| NB | Model         | Optimizer | Norm | HW/SW            |---------|----------------|--------------|--------------|--------------|--------------|--------------|---------------|
+|    |               |           |      |                  | Test    | Train  | Test  | Train | Test | Train | Test | Train | Test | Train | Test | Train | Test | Train | Test  |
+|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 1  | VGG16         | SGD       | No   | i7-8750H+GTX1060 |      78 |      - |     - |    -  |    - |     - |    - |    -  |    - |    -  |    - |     - |    - |       -       |
+|    |               |           |      | 9-285K+A770      |      76 |     29 |     3 |   30  |   20 |    62 |   52 |   2.5 |  1.7 |    97 |   97 |   217 |  215 |      2.8      |
+|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 2  | VGG16         | SGD       | Yes  | i7-8750H+GTX1060 |      85 |     69 |     8 |    -  |    - |     - |    - |    -  |    - |   100 |    - |     - |    - |       -       |
+|    |               |           |      | 9-285K+A770      |      85 |     29 |     3 |   30  |   20 |    62 |   52 |   3.1 |  1.7 |    97 |   97 |   215 |  215 |      2.8      |
+|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 3  | VGG16         | SGD+Mntm  | Yes  | i7-8750H+GTX1060 |      89 |     68 |     7 |    -  |    - |     - |    - |    -  |    - |   100 |   98 |     - |    - |      1.9      |
+|    |               |           |      | 9-285K+A770      |      89 |     31 |     3 |   30  |   20 |    64 |   54 |   3.7 |  2.4 |    97 |   90 |   215 |  210 |      3.6      |
+|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 4  | VGG16         | Adam      | Yes  | i7-8750H+GTX1060 |      61 |      - |     - |    -  |    - |     - |    - |    -  |    - |   100 |    - |     - |    - |      4.0      |
+|    |               |           |      | 9-285K+A770      |      63 |     34 |     3 |   30  |   20 |    40 |   30 |   3.9 |  2.9 |    97 |   92 |   205 |  205 |      4.1      |
+|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 5  | Inception V3  | SGD       | Yes  | i7-8750H+GTX1060 |       - |     46 |     6 |    -  |    - |     - |    - |    -  |    - |    97 |   97 |     - |    - |      1.2      |
+|    |               |           |      | 9-285K+A770      |      42 |     26 |     3 |   30  |   20 |    66 |   56 |   5.2 |  3.4 |    93 |   86 |   183 |  146 |      1.0      |
+|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 6  | ResNet152     | SGD       | Yes  | i7-8750H+GTX1060 |      77 |     75 |     9 |    -  |    - |     - |    - |    -  |    - |   100 |  100 |     - |    - |      1.0      |
+|    |               |           |      | 9-285K+A770      |      77 |     42 |     5 |   30  |   20 |    61 |   51 |   3.0 |  2.2 |    97 |   92 |   193 |  191 |      1.0      |
+|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 7  | DenseNet121   | SGD+Mntm  | Yes  | i7-8750H+GTX1060 |      95 |     34 |     4 |    -  |    - |     - |    - |    -  |    - |    98 |   98 |     - |    - |      1.0      |
+|    |               |           |      | 9-285K+A770      |      93 |     22 |     3 |   30  |   20 |    40 |   30 |   2.9 |  1.9 |    95 |   87 |   167 |  137 |      1.4      |
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ```
